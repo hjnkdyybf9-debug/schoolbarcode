@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cute Sparkly Barcode - ระบบบาร์โค้ดสุดฟรุ้งฟริ้ง</title>
+  <!-- Google Fonts: Kanit & Kodchasan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Kodchasan:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       1. CUTE PASTEL & SPARKLE THEME (CSS)
+       ========================================== */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #ffd1dc 0%, #ffe6fa 35%, #e8dff5 70%, #fce1e4 100%);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --primary-color: #ff85a2;
+      --primary-hover: #ff6584;
+      --accent-color: #b5838d;
+      --text-dark: #5c4b51;
+      --shadow: 0 15px 35px rgba(255, 133, 162, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none; /* ป้องกันการคลุมดำก๊อปปี้ */
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Kanit', sans-serif;
+      background: var(--bg-gradient);
+      background-size: 300% 300%;
+      animation: gradientBG 12s ease infinite;
+      overflow-x: hidden;
+      color: var(--text-dark);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Sparkles & Heart Background Effects */
+    .bg-sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sparkle-item {
+      position: absolute;
+      animation: floatUp linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Main Container Card */
+    .app-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 440px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 30px;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow);
+      padding: 30px 24px;
+      text-align: center;
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Header Styling */
+    .title-wrapper h1 {
+      font-family: 'Kodchasan', sans-serif;
+      font-size: 26px;
+      margin: 0 0 6px 0;
+      color: #ff5277;
+      text-shadow: 2px 2px 0px #fff;
+    }
+
+    .title-wrapper p {
+      margin: 0 0 20px 0;
+      font-size: 13px;
+      color: #886d75;
+    }
+
+    /* Form & Input Controls */
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #6a4c58;
+    }
+
+    .input-box-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .number-input {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 24px;
+      font-family: 'Kodchasan', sans-serif;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 4px;
+      border: 2px solid #ffd0dc;
+      border-radius: 20px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: #ff5277;
+      transition: all 0.3s ease;
+    }
+
+    .number-input:focus {
+      border-color: #ff85a2;
+      box-shadow: 0 0 15px rgba(255, 133, 162, 0.4);
+      transform: scale(1.02);
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 14px 20px;
+      font-family: 'Kanit', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(255, 133, 162, 0.3);
+    }
+
+    .btn-pink {
+      background: linear-gradient(45deg, #ff85a2, #ffacb7);
+      color: white;
+    }
+
+    .btn-pink:hover {
+      background: linear-gradient(45deg, #ff6584, #ff94a4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(255, 101, 132, 0.4);
+    }
+
+    .btn-pink:active {
+      transform: translateY(1px);
+    }
+
+    .btn-share {
+      background: #ffffff;
+      color: #7d5a68;
+      border: 2px solid #ffe0e9;
+      margin-top: 15px;
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .btn-share:hover {
+      background: #fff5f7;
+      border-color: #ffb6c1;
+    }
+
+    /* Barcode Display Area */
+    .barcode-display-area {
+      display: none;
+      margin-top: 22px;
+      padding: 20px 15px;
+      background: #ffffff;
+      border-radius: 24px;
+      border: 2px dashed #ffb6c1;
+      position: relative;
+      animation: popIn 0.4s ease-out forwards;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffe3eb;
+      color: #d81b60;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .timer-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .timer-progress-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ff85a2, #ff5277);
+      transition: width 1s linear;
+    }
+
+    .svg-barcode-container {
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      padding: 10px 0;
+    }
+
+    .security-watermark {
+      font-size: 11px;
+      color: #a0808b;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px rgba(0,0,0,0.06) solid;
+      padding-top: 8px;
+    }
+
+    .security-watermark span {
+      font-family: monospace;
+    }
+
+    /* Security Notice Banner */
+    .security-notice {
+      font-size: 11px;
+      color: #b8869b;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    /* Anti-Screenshot Overlay (Blur Protection) */
+    .blur-protected {
+      filter: blur(25px) opacity(0.1) !important;
+      pointer-events: none !important;
+    }
+
+    .security-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 192, 203, 0.95);
+      backdrop-filter: blur(15px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #d81b60;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #ff5277;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 10000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- Sparkles Background Effect -->
+  <div class="bg-sparkles" id="sparklesBg"></div>
+
+  <!-- Main Card -->
+  <div class="app-card" id="appCard">
+    <div class="title-wrapper">
+      <h1>✨ Cute Barcode ✨</h1>
+      <p>ระบบสร้างบารโค้ดส่วนตัวสุดน่ารัก (01 - 99)</p>
+    </div>
+
+    <div class="input-group">
+      <label for="memberId">กรอกเลขประจำตัวของคุณ</label>
+      <div class="input-box-wrapper">
+        <input 
+          type="text" 
+          id="memberId" 
+          class="number-input" 
+          placeholder="01" 
+          maxlength="2" 
+          autocomplete="off"
+          inputmode="numeric"
+        >
+      </div>
+    </div>
+
+    <button class="btn btn-pink" id="generateBtn" onclick="handleGenerate()">
+      🌸 แสดงบาร์โค้ดของฉัน 🌸
+    </button>
+
+    <!-- Display Barcode Container -->
+    <div class="barcode-display-area" id="barcodeArea">
+      <div class="timer-badge">
+        ⏳ จะหมดอายุใน: <span id="timerSeconds">20</span> วินาที
+      </div>
+      <div class="timer-progress-bar">
+        <div class="timer-progress-fill" id="timerProgress"></div>
+      </div>
+
+      <!-- Render Barcode Here -->
+      <div class="svg-barcode-container" id="barcodeOutput"></div>
+
+      <!-- Security Live Timestamp -->
+      <div class="security-watermark">
+        <span>🔒 ลิขสิทธิ์ส่วนบุคคล</span>
+        <span id="liveTimestamp">00:00:00</span>
+      </div>
+    </div>
+
+    <!-- Website Share Button -->
+    <button class="btn btn-share" onclick="copyWebsiteLink()">
+      🔗 คัดลอกลิงก์เว็บนี้ส่งให้เพื่อน
+    </button>
+
+    <div class="security-notice">
+      🛡️ ป้องกันการแคปหน้าจอ & ลิงก์จะไม่แสดงบาร์โค้ดโดยตรง
+    </div>
+  </div>
+
+  <!-- Security Overlay -->
+  <div class="security-overlay" id="securityOverlay">
+    <div style="font-size: 50px; margin-bottom: 10px;">⚠️</div>
+    <div>ไม่อนุญาตให้แคปภาพหน้าจอหรือบันทึกภาพ</div>
+    <div style="font-size: 13px; font-weight: normal; margin-top: 8px; color: #886d75;">
+      เพื่อความปลอดภัย บาร์โค้ดจะถูกซ่อนโดยอัตโนมัติ
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div class="toast" id="toast">คัดลอกลิงก์เรียบร้อยแล้ว! 💖</div>
+
+  <!-- ==========================================
+       2. JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    // --- 1. Pure JS CODE128 Barcode Generator (No External Library Required) ---
+    function generateCODE128SVG(text) {
+      const code128BTable = [
+        "212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213",
+        "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132",
+        "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211",
+        "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313",
+        "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331",
+        "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111",
+        "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214",
+        "112412", "122114", "122411", "142112", "142211", "241211", "221114", "411122", "211142", "113114",
+        "114113", "114311", "411113", "411311", "113141", "114131", "311141", "411131", "211412", "211214",
+        "211232", "2331112"
+      ];
+
+      const START_CODE_B = 104;
+      const STOP_CODE = 106;
+
+      let patterns = [];
+      let checksum = START_CODE_B;
+
+      patterns.push(code128BTable[START_CODE_B]);
+
+      for (let i = 0; i < text.length; i++) {
+        let code = text.charCodeAt(i) - 32;
+        checksum += code * (i + 1);
+        patterns.push(code128BTable[code]);
+      }
+
+      checksum %= 103;
+      patterns.push(code128BTable[checksum]);
+      patterns.push(code128BTable[STOP_CODE]);
+
+      let patternStr = patterns.join("");
+      let moduleWidth = 3;
+      let height = 70;
+      let totalWidth = patternStr.length * moduleWidth + 40;
+
+      let svgBars = "";
+      let xPos = 20;
+
+      for (let i = 0; i < patternStr.length; i++) {
+        let width = parseInt(patternStr[i]) * moduleWidth;
+        if (i % 2 === 0) {
+          svgBars += `<rect x="${xPos}" y="10" width="${width}" height="${height}" fill="#ff3366"/>`;
+        }
+        xPos += width;
+      }
+
+      return `<svg width="100%" height="110" viewBox="0 0 ${totalWidth} 110" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#ffffff"/>
+        ${svgBars}
+        <text x="${totalWidth / 2}" y="98" font-family="'Kodchasan', sans-serif" font-size="18" font-weight="bold" fill="#ff5277" text-anchor="middle">${text}</text>
+      </svg>`;
+    }
+
+    // --- 2. Floating Sparkles Animation Setup ---
+    function initSparkles() {
+      const container = document.getElementById('sparklesBg');
+      const icons = ['✨', '💖', '🌸', '⭐', '☁️'];
+      
+      for (let i = 0; i < 18; i++) {
+        const el = document.createElement('div');
+        el.className = 'sparkle-item';
+        el.innerText = icons[Math.floor(Math.random() * icons.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = (6 + Math.random() * 8) + 's';
+        el.style.animationDelay = (Math.random() * 5) + 's';
+        el.style.fontSize = (14 + Math.random() * 16) + 'px';
+        container.appendChild(el);
+      }
+    }
+
+    // --- 3. Barcode Logic & 20-Second Countdown Timer ---
+    let timerInterval = null;
+    let clockInterval = null;
+
+    function handleGenerate() {
+      const input = document.getElementById('memberId');
+      let val = input.value.trim();
+
+      // Format input to 2 digits
+      if (val.length === 1) {
+        val = '0' + val;
+        input.value = val;
+      }
+
+      const num = parseInt(val, 10);
+      if (isNaN(num) || num < 1 || num > 99) {
+        showToast('กรุณากรอกเลข 01 - 99 เท่านั้นน้า 🥺');
+        return;
+      }
+
+      // Render Barcode
+      const barcodeContainer = document.getElementById('barcodeOutput');
+      barcodeContainer.innerHTML = generateCODE128SVG(`ID-${val}`);
+
+      // Display Area
+      const displayArea = document.getElementById('barcodeArea');
+      displayArea.style.display = 'block';
+
+      // Start 20s Countdown Timer
+      startTimer(20);
+      startLiveClock();
+    }
+
+    function startTimer(seconds) {
+      clearInterval(timerInterval);
+      
+      let remaining = seconds;
+      const timerDisplay = document.getElementById('timerSeconds');
+      const progressFill = document.getElementById('timerProgress');
+
+      timerDisplay.innerText = remaining;
+      progressFill.style.width = '100%';
+
+      timerInterval = setInterval(() => {
+        remaining--;
+        timerDisplay.innerText = remaining;
+        progressFill.style.width = (remaining / seconds * 100) + '%';
+
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          hideBarcodeArea();
+          showToast('บาร์โค้ดหมดอายุแล้วจ้า ⏰');
+        }
+      }, 1000);
+    }
+
+    function hideBarcodeArea() {
+      const displayArea = document.getElementById('barcodeArea');
+      displayArea.style.display = 'none';
+      document.getElementById('barcodeOutput').innerHTML = '';
+      clearInterval(clockInterval);
+    }
+
+    function startLiveClock() {
+      clearInterval(clockInterval);
+      const clockEl = document.getElementById('liveTimestamp');
+      
+      const updateTime = () => {
+        const now = new Date();
+        clockEl.innerText = now.toLocaleTimeString('th-TH');
+      };
+      
+      updateTime();
+      clockInterval = setInterval(updateTime, 1000);
+    }
+
+    // --- 4. Anti-Screenshot & Security Protection ---
+    // Blur screen when window loses focus or user switches tab
+    window.addEventListener('blur', () => {
+      triggerSecurityBlur(true);
+    });
+
+    window.addEventListener('focus', () => {
+      triggerSecurityBlur(false);
+    });
+
+    // Detect PrintScreen Key
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'PrintScreen') {
+        triggerSecurityBlur(true);
+        showToast('🔒 ระบบป้องกันการบันทึกภาพหน้าจอ');
+        setTimeout(() => triggerSecurityBlur(false), 2500);
+      }
+    });
+
+    // Detect Key Combinations for Screenshot / DevTools
+    window.addEventListener('keydown', (e) => {
+      if (
+        (e.ctrlKey && e.key === 'p') ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'S')) ||
+        (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4'))
+      ) {
+        e.preventDefault();
+        triggerSecurityBlur(true);
+        setTimeout(() => triggerSecurityBlur(false), 2500);
+      }
+    });
+
+    function triggerSecurityBlur(enable) {
+      const card = document.getElementById('appCard');
+      const overlay = document.getElementById('securityOverlay');
+
+      if (enable) {
+        card.classList.add('blur-protected');
+        overlay.style.display = 'flex';
+      } else {
+        card.classList.remove('blur-protected');
+        overlay.style.display = 'none';
+      }
+    }
+
+    // --- 5. Clean Share Link (Does NOT share barcode data) ---
+    function copyWebsiteLink() {
+      // Copies clean domain URL without queries or barcode IDs
+      const cleanUrl = window.location.origin + window.location.pathname;
+      
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(cleanUrl).then(() => {
+          showToast('คัดลอกลิงก์เว็บเรียบร้อยแล้ว! 💖');
+        });
+      } else {
+        // Fallback
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = cleanUrl;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        showToast('คัดลอกลิงก์เว็บเรียบร้อยแล้ว! 💖');
+      }
+    }
+
+    // --- 6. Helper Utilities ---
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Auto-format input to 2 digits on type
+    document.getElementById('memberId').addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+
+    // Initialize Sparkles Background on Load
+    window.onload = () => {
+      initSparkles();
+    };
+  </script>
+</body>
+</html>
+
